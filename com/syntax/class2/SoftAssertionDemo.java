@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -34,17 +34,17 @@ public class SoftAssertionDemo {
         driver.quit();
     }
 
-    @Test
-    public void logoAndValidLogin(){
+    @Test()
+    public void logoAndValidLogin(String username, String password){
         //verifying that logo is displayed
         WebElement element = driver.findElement(By.xpath("//div[@id = 'divLogo']//img"));
         //creting an object of soft assertion
         SoftAssert softAsert=new SoftAssert();
         softAsert.assertTrue(!element.isDisplayed(),"Logo is not displayed");
         //entering valid credentials to login
-        String username="Admin";
+        //String username="Admin";
         driver.findElement(By.id("txtUsername")).sendKeys(username);
-        driver.findElement(By.id("txtPassword")).sendKeys("Hum@nhrm123");
+        driver.findElement(By.id("txtPassword")).sendKeys(password);
         driver.findElement(By.id("btnLogin")).click();
         //validating that we ar logged in
         WebElement welcomeMessage = driver.findElement(By.cssSelector("a#welcome"));

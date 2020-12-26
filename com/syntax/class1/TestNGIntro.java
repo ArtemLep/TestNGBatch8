@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class TestNGIntro {
 
-    @Test
+    @Test()
     public void hello(){
         System.out.println("Hello");
     }
