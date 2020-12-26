@@ -37,6 +37,7 @@ public class Logintest {
         }
     }
 
+
     @Test(groups = "regression")
     public void titleValidation(){
         String expectedTitle="Human Management System";
