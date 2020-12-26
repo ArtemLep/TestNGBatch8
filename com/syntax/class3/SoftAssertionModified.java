@@ -27,27 +27,27 @@ public class SoftAssertionModified {
         System.out.println("I am after suite annotation");
     }
 
-    @BeforeTest //before the test --> based on xml file
+    @BeforeTest(alwaysRun = true) //before the test --> based on xml file
     public void beforeTest(){
         System.out.println("I am before test annotation");
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     public void afterTest(){
         System.out.println("I am after test annotation");
     }
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass(){
         System.out.println("Before class annotation");
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void afterClass(){
         System.out.println("After class annotation");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)//enforce execution of precondition regardless to which group @Test belongs
     public void openAndNavigate() {
         System.out.println("Before method annotation");
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
@@ -57,13 +57,13 @@ public class SoftAssertionModified {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         System.out.println("After method annotation");
         driver.quit();
     }
 
-   @Test()
+   @Test(groups = "regression")
     public void logoAndValidLogin(){
         //verifying that logo is displayed
         WebElement element = driver.findElement(By.xpath("//div[@id = 'divLogo']//img"));
@@ -83,8 +83,9 @@ public class SoftAssertionModified {
         softAsert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"smoke", "sprint2"})
     public void simpleTest(){
         System.out.println("Hello from simple test");
     }
 }
+//identifies all test caes to the specific group, create a regresion xml and execute all test from smoke and then regression

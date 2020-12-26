@@ -20,7 +20,7 @@ public class SoftAssertionDemo {
 
     WebDriver driver;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openAndNavigate() {
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
         driver = new ChromeDriver();
@@ -29,22 +29,22 @@ public class SoftAssertionDemo {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         driver.quit();
     }
 
-    @Test()
-    public void logoAndValidLogin(String username, String password){
+    @Test(groups = "regression")
+    public void logoAndValidLogin(){
         //verifying that logo is displayed
         WebElement element = driver.findElement(By.xpath("//div[@id = 'divLogo']//img"));
         //creting an object of soft assertion
         SoftAssert softAsert=new SoftAssert();
         softAsert.assertTrue(!element.isDisplayed(),"Logo is not displayed");
         //entering valid credentials to login
-        //String username="Admin";
+        String username="Admin";
         driver.findElement(By.id("txtUsername")).sendKeys(username);
-        driver.findElement(By.id("txtPassword")).sendKeys(password);
+        driver.findElement(By.id("txtPassword")).sendKeys("Hum@nhrm123");
         driver.findElement(By.id("btnLogin")).click();
         //validating that we ar logged in
         WebElement welcomeMessage = driver.findElement(By.cssSelector("a#welcome"));

@@ -14,7 +14,7 @@ public class Logintest {
 
     WebDriver driver;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openAndNavigate(){
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
         driver=new ChromeDriver();
@@ -23,7 +23,7 @@ public class Logintest {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
-    @Test
+    @Test (groups = "smoke")
     public void validAdminLogin(){
         driver.findElement(By.id("txtUsername")).sendKeys("Admin");
         driver.findElement(By.id("txtPassword")).sendKeys("Hum@nhrm123");
@@ -37,7 +37,7 @@ public class Logintest {
         }
     }
 
-    @Test
+    @Test(groups = "regression")
     public void titleValidation(){
         String expectedTitle="Human Management System";
         String actualTitle=driver.getTitle();
@@ -48,7 +48,7 @@ public class Logintest {
         }
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
         driver.quit();
     }
